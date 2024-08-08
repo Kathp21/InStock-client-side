@@ -12,9 +12,7 @@ import DeleteInventoryModal from '../../DeleteInventoryModal/DeleteInventoryModa
 export default function InventoryCard({item, onDelete}) {
     const navigate = useNavigate();
     const [ isDeleteModalOpen, setIsDeleteModalOpen ] = useState(false)
-    const { REACT_APP_API_BASE_PATH } = process.env
 
-  
     const handleEditClick = () => {
     navigate("/Editinventory",{ state: { item } });
     };
@@ -25,8 +23,6 @@ export default function InventoryCard({item, onDelete}) {
 
     const handleDeleteConfirm = async () => {
         try {
-            console.log(`Attempting to delete item with id: ${item.id}`);
-
             await onDelete(item.id)
 
         } catch (error) {

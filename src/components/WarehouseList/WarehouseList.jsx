@@ -26,6 +26,16 @@ function WarehouseList() {
 
     }, [])
 
+    const handleDeleteItem = async (id) => {
+        try {
+            await axios.delete(`${REACT_APP_API_BASE_PATH}/api/warehouses/${id}`)
+            setAllWarehouses(prevWarehouses => prevWarehouses.filter(warehouse => warehouse.id !== id))
+        }catch (error) {
+            console.error('Failed to delete the warehouse:', error)
+            alert('Failed to delete the warehouse')
+        }
+    }
+
 
     return (
         <main className="warehouse-list">
@@ -49,9 +59,10 @@ function WarehouseList() {
                 {allWarehouses.map((warehouse) => {
                         return ( 
                             <WarehouseCard 
-                                    key={warehouse.id}
-                                    warehouse={warehouse} 
-                                />
+                                key={warehouse.id}
+                                warehouse={warehouse} 
+                                onDelete = {handleDeleteItem}
+                            />
                         )
                     })}
             </ul>
