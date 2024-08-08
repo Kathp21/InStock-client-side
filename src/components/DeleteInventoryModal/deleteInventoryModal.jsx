@@ -1,8 +1,10 @@
 import React from 'react';
-import "./deleteInventorModal.scss"
+import "./DeleteInventoryModal.scss"
 
 const DeleteInventoryModal = ({ isOpen, onClose, onDelete, itemName }) => {
   if (!isOpen) return null; 
+
+  console.log({ isOpen, onClose, onDelete, itemName });
 
   return (
     <div className="delete-inventory-modal-overlay">

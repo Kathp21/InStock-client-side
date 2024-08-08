@@ -25,6 +25,18 @@ export default function InventoryList() {
         getAllInventories()
     }, [])
 
+    const handleDeleteItem = async (id) => {
+        try {
+            console.log(`Attempting to delete item with id: ${id}`);
+            await axios.delete(`${REACT_APP_API_BASE_PATH}/api/inventories/${id}`)
+            console.log('Item successfully deleted from server');
+            setInventories(prevItems => prevItems.filter(item => item.id !== id))
+        }catch (error) {
+            console.error('Failed to delete the item:', error)
+            alert('Failed to delete the item')
+        }
+    }
+
     return (
         <main className="inventory-list">
             <div className="inventory-list__header">
@@ -48,6 +60,7 @@ export default function InventoryList() {
                         <InventoryCard
                             key={item.id}
                             item={item}
+                            onDelete={handleDeleteItem}
                         /> 
                     )
                 })}
